@@ -1,0 +1,105 @@
+<html>
+<head>
+<title>PyCyclosDemoUnitTest.py</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.ln { color: #606366; font-weight: normal; font-style: normal; }
+.s0 { color: rgb(204,120,50); }
+.s1 { color: rgb(169,183,198); }
+.s2 { color: rgb(165,194,97); }
+.s3 { color: rgb(104,151,187); }
+.s4 { color: rgb(128,128,128); }
+</style>
+</head>
+<BODY BGCOLOR="#2b2b2b">
+<TABLE CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<TR><TD><CENTER>
+<FONT FACE="Arial, Helvetica" COLOR="#000000">
+PyCyclosDemoUnitTest.py</FONT>
+</center></TD></TR></TABLE>
+<pre>
+<span class="s0">import </span><span class="s1">time 
+</span><span class="s0">import </span><span class="s1">unittest 
+ 
+</span><span class="s0">from </span><span class="s1">selenium </span><span class="s0">import </span><span class="s1">webdriver 
+ 
+ 
+</span><span class="s0">class </span><span class="s1">CyclosWebApp(unittest.TestCase): 
+ 
+    </span><span class="s0">def </span><span class="s1">setUp(self): 
+        self.driver = webdriver.Chrome(executable_path=</span><span class="s2">'C:</span><span class="s0">\\</span><span class="s2">Users</span><span class="s0">\\</span><span class="s2">lenovo</span><span class="s0">\\</span><span class="s2">PycharmProjects</span><span class="s0">\\</span><span class="s2">FirstSeleniumTest</span><span class="s0">\\</span><span class="s2">Drivers</span><span class="s0">\\</span><span class="s2">chromedriver.exe'</span><span class="s1">) 
+ 
+    </span><span class="s0">def </span><span class="s1">testCyclosLogin(self): 
+        driver = self.driver 
+        driver.get(</span><span class="s2">&quot;https://demo.cyclos.org/#home&quot;</span><span class="s1">) 
+        driver.set_page_load_timeout(</span><span class="s3">10</span><span class="s1">) 
+        driver.maximize_window() 
+        self.assertIn(</span><span class="s2">&quot;Cyclos&quot;</span><span class="s0">,</span><span class="s1">driver.title) 
+        time.sleep(</span><span class="s3">5</span><span class="s1">) 
+        elem = driver.find_element_by_xpath(</span><span class="s2">&quot;/html/body/div[3]/div[1]/div/ul/li[2]/a/span&quot;</span><span class="s1">) 
+        elem.click() 
+        time.sleep(</span><span class="s3">4</span><span class="s1">) 
+        elem = driver.find_element_by_xpath( 
+            </span><span class="s2">&quot;/html/body/div[3]/div[3]/div/div/div[2]/div[2]/div[2]/div/div/div/div[2]/form/div/input&quot;</span><span class="s1">) 
+        elem.send_keys(</span><span class="s2">&quot;demo&quot;</span><span class="s1">) 
+ 
+        elem = driver.find_element_by_xpath(</span><span class="s2">&quot;//input[@type='password']&quot;</span><span class="s1">) 
+        elem.send_keys(</span><span class="s2">&quot;1234&quot;</span><span class="s1">) 
+        time.sleep(</span><span class="s3">2</span><span class="s1">) 
+        elem = driver.find_element_by_xpath(</span><span class="s2">&quot;//div[@class='actionButtonText']&quot;</span><span class="s1">) 
+        elem.click() 
+        time.sleep(</span><span class="s3">4</span><span class="s1">) 
+        </span><span class="s0">assert </span><span class="s2">&quot;Fail to login&quot; </span><span class="s0">not in </span><span class="s1">driver.page_source 
+        time.sleep(</span><span class="s3">4</span><span class="s1">) 
+        elem = driver.find_element_by_xpath(</span><span class="s2">&quot;//span[@class='gwt-InlineLabel'][contains(text(),'Users')]&quot;</span><span class="s1">) 
+        elem.click() 
+        time.sleep(</span><span class="s3">4</span><span class="s1">) 
+        elem = driver.find_element_by_xpath(</span><span class="s2">&quot;//html//td[@class='formField firstFormField']/input[1]&quot;</span><span class="s1">) 
+        elem.send_keys(</span><span class="s2">&quot;nilesh&quot;</span><span class="s1">) 
+        time.sleep(</span><span class="s3">2</span><span class="s1">) 
+        elem = driver.find_element_by_xpath(</span><span class="s2">&quot;//div[@class='actionButtonText'][contains(text(),'Search')]&quot;</span><span class="s1">) 
+        elem.click() 
+        time.sleep(</span><span class="s3">4</span><span class="s1">) 
+        elem = driver.find_element_by_xpath(</span><span class="s2">&quot;//div[@class='tiledResultLabel']&quot;</span><span class="s1">) 
+        elem.click() 
+        time.sleep(</span><span class="s3">5</span><span class="s1">) 
+ 
+        </span><span class="s4"># User Page</span><span class="s1"> 
+        elem = driver.find_element_by_xpath(</span><span class="s2">&quot;//span[@class='gwt-InlineLabel'][contains(text(),'Make payment')]&quot;</span><span class="s1">) 
+        elem.click() 
+        time.sleep(</span><span class="s3">4</span><span class="s1">) 
+        elem = driver.find_element_by_xpath(</span><span class="s2">&quot;//html//td[1]/input[1]&quot;</span><span class="s1">) 
+        elem.send_keys(</span><span class="s2">&quot;100&quot;</span><span class="s1">) 
+        elem = driver.find_element_by_xpath(</span><span class="s2">&quot;//textarea[@class='inputField full']&quot;</span><span class="s1">) 
+        elem.send_keys(</span><span class="s2">&quot;Money added to nilesh account using Cyclos App!!!&quot;</span><span class="s1">) 
+        elem = driver.find_element_by_xpath(</span><span class="s2">&quot;//div[@class='actionButtonText']&quot;</span><span class="s1">) 
+        elem.click() 
+        time.sleep(</span><span class="s3">3</span><span class="s1">) 
+        </span><span class="s0">assert </span><span class="s2">&quot;Money added to nilesh account using Cyclos App!!!&quot; </span><span class="s0">in </span><span class="s1">driver.page_source 
+        elem = driver.find_element_by_xpath(</span><span class="s2">&quot;//div[@class='actionButtonText']&quot;</span><span class="s1">) 
+        elem.click() 
+        time.sleep(</span><span class="s3">4</span><span class="s1">) 
+        </span><span class="s0">assert </span><span class="s2">&quot;The payment was successful&quot; </span><span class="s0">in </span><span class="s1">driver.page_source 
+        </span><span class="s0">print</span><span class="s1">(</span><span class="s2">&quot;Payment done !!!&quot;</span><span class="s1">) 
+        elem = driver.find_element_by_xpath(</span><span class="s2">&quot;//div[@class='actionButtonText'][contains(text(),'Close')]&quot;</span><span class="s1">) 
+        elem.click() 
+        time.sleep(</span><span class="s3">3</span><span class="s1">) 
+        elem = driver.find_element_by_xpath(</span><span class="s2">&quot;//span[@class='gwt-InlineLabel'][contains(text(),'Home')]&quot;</span><span class="s1">) 
+        elem.click() 
+        time.sleep(</span><span class="s3">2</span><span class="s1">) 
+        elem = driver.find_element_by_xpath(</span><span class="s2">&quot;//span[@class='statusMenuText'][contains(text(),'Logout')]&quot;</span><span class="s1">) 
+        elem.click() 
+        </span><span class="s0">print</span><span class="s1">(</span><span class="s2">&quot;Cyclos App logged out successfully !!!&quot;</span><span class="s1">) 
+ 
+    </span><span class="s0">def </span><span class="s1">tearDown(self): 
+        self.driver.close() 
+        self.driver.quit() 
+ 
+ 
+</span><span class="s0">if </span><span class="s1">__name__ == </span><span class="s2">&quot;__main__&quot;</span><span class="s1">: 
+    unittest.main() 
+ 
+ 
+</span></pre>
+</body>
+</html>
